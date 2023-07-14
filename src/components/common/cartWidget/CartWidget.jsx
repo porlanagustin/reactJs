@@ -1,9 +1,18 @@
-import { FaShoppingCart } from "react-icons/fa";
+import { Badge } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
 
 const CartWidget = () => {
   return (
     <div>
-      <FaShoppingCart color="white"></FaShoppingCart>
+      <Link to="/cart" style={{ color: "black" }}>
+        <Badge badgeContent={4} color="primary">
+          <ShoppingCartIcon
+            color="main"
+            sx={{ fontSize: 40 }}
+          ></ShoppingCartIcon>
+        </Badge>
+      </Link>
     </div>
   );
 };

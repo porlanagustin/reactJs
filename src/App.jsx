@@ -1,17 +1,11 @@
-import Navbar from "./components/layout/navbar/Navbar";
-import { useState } from "react";
-import HomeContainer from "./components/pages/Home/HomeContainer";
-import ItemListContainer from "./components/pages/itemList/ItemListContainer";
-import Footer from "./components/layout/footer/Footer";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router/AppRouter";
 
 function App() {
   return (
-    <div>
-      <Navbar></Navbar>
-      <HomeContainer></HomeContainer>
-      <ItemListContainer></ItemListContainer>
-      <Footer></Footer>
-    </div>
+    <BrowserRouter>
+      <AppRouter></AppRouter>
+    </BrowserRouter>
   );
 }
 
