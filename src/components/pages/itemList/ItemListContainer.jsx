@@ -26,7 +26,11 @@ const ItemListContainer = () => {
   }, [categoryName]);
 
   if (items.length == 0) {
-    return <LoadingWeb></LoadingWeb>;
+    return (
+      <>
+        <LoadingWeb></LoadingWeb>
+      </>
+    );
   }
 
   return (
