@@ -8,14 +8,17 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ item }) => {
   return (
-    <Card sx={{ width: 345 }}>
-      <CardMedia sx={{ height: 140 }} image={item.img} title="green iguana" />
+    <Card
+      sx={{
+        width: 345,
+        borderRadius: "8px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <CardMedia sx={{ minHeight: 250 }} image={item.img} title={item.title} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {item.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {item.description}
         </Typography>
       </CardContent>
       <CardActions>
