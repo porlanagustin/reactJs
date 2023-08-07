@@ -8,14 +8,35 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import "./cartContainer.css";
+import Swal from "sweetalert2";
 
 const CartContainer = () => {
   const { cart, clearCart, deleteById, getTotalPrice } =
     useContext(CartContext);
   let totalPrice = getTotalPrice();
 
+  const finalizarCompra = () => {
+    Swal.fire({
+      title: "Deseas confirmar la compra?",
+      text: "Si confirmas la compra, el cargo se realizará en tu tarjeta de crédito",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, comprar!",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          "Compra confirmada!",
+          "Recibirás en tu correo electrónico la confirmación de la compra.",
+          "success"
+        );
+      }
+    });
+  };
   return (
     <div className="container">
       {cart.length > 0 ? (
@@ -61,7 +82,11 @@ const CartContainer = () => {
             <Button onClick={clearCart} variant="contained" color="error">
               Limpiar Carrito
             </Button>
-            <Button variant="contained" color="success">
+            <Button
+              variant="contained"
+              color="success"
+              onClick={finalizarCompra}
+            >
               Terminar Compra
             </Button>
           </CardActions>

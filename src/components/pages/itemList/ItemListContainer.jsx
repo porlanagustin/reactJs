@@ -1,28 +1,31 @@
 import ItemList from "./ItemList";
-import { products } from "../../../productsMock";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LoadingWeb from "../../common/loadingWeb/LoadingWeb";
+import { db } from "../../../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
-
   const { categoryName } = useParams();
 
   useEffect(() => {
-    let productosFiltrados = products.filter(
-      (product) => product.category === categoryName
-    );
-
-    const tarea = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(categoryName ? productosFiltrados : products);
-      }, 4000);
+    let consult;
+    let productsCollection = collection(db, "products");
+    if (!categoryName) {
+      consult = productsCollection;
+    } else {
+      consult = query(
+        productsCollection,
+        where("category", "==", categoryName)
+      );
+    }
+    getDocs(consult).then((res) => {
+      let arrProducts = res.docs.map((el) => {
+        return { ...el.data(), id: el.id };
+      });
+      setItems(arrProducts);
     });
-
-    tarea
-      .then((respuesta) => setItems(respuesta))
-      .catch((error) => console.log(error));
   }, [categoryName]);
 
   if (items.length == 0) {
@@ -31,13 +34,13 @@ const ItemListContainer = () => {
         <LoadingWeb></LoadingWeb>
       </>
     );
+  } else {
+    return (
+      <div>
+        <ItemList items={items}></ItemList>
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <ItemList items={items}></ItemList>
-    </div>
-  );
 };
 
 export default ItemListContainer;

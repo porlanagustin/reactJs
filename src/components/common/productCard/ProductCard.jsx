@@ -15,7 +15,7 @@ const ProductCard = ({ item }) => {
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <CardMedia sx={{ minHeight: 250 }} image={item.img} title={item.title} />
+      <CardMedia component="img" image={item.img} title={item.title} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {item.title}

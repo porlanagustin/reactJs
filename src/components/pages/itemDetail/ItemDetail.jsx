@@ -25,9 +25,10 @@ const ItemDetail = ({ product, agregarAlCarrito, cantidadEnCarrito }) => {
         }}
       >
         <CardMedia
+          component="img"
           sx={{ minHeight: 500 }}
-          image={product.img}
           title={product.title}
+          image={product.img}
         ></CardMedia>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
